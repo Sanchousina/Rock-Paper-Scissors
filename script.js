@@ -1,15 +1,25 @@
 "use strict"
 
 const weapons = ['rock', 'paper', 'scissors'];
-let playerWins = 0, computerWins = 0;
+let playerWins = 0;
+let computerWins = 0;
 
 function getComputerChoice(){
    let index = Math.floor(Math.random()*3);
    return weapons[index];
 }
 
+function getPlayerChoice(){
+    let str;
+    do{
+        str = prompt("Rock Paper Scissors?", "");
+        if(str === null) return null;
+        str = str.toLowerCase();
+    }while(str === "" || !weapons.includes(str))
+    return str;
+}
+
 function playRound(playerChoice, computerChoice){
-    playerChoice = playerChoice.toLowerCase();
     if (playerChoice == "rock"){
         if(computerChoice == "scissors"){
             playerWins++;
@@ -45,8 +55,43 @@ function playRound(playerChoice, computerChoice){
     }
 }
 
-let playerChoice = "ScissorS";
-let computerChoice = getComputerChoice();
-console.log(playerChoice);
-console.log(computerChoice);
-console.log(playRound(playerChoice, computerChoice));
+function reset(){
+    playerWins = 0;
+    computerWins = 0;
+}
+
+function determineWinner(){
+    playerWins > computerWins ? console.log("You Won!!!")
+    : playerWins < computerWins? console.log("You lost^(")
+    : console.log("Friendship won!");
+}
+
+function tryAgain(){
+    if(confirm("Wanna try again?")){
+        game();
+    }else{
+        return;
+    }
+}
+
+function game(){
+    console.clear();
+    reset();
+
+    for(let i = 0; i < 5; i++){
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+
+        if(playerChoice === null){
+            return;
+        }
+
+        console.log(playRound(playerChoice, computerChoice));
+        console.log(`You: ${playerWins}\tComputer:${computerWins}`);
+    }
+
+    determineWinner();
+    tryAgain();
+}
+
+game();
