@@ -79,7 +79,8 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
     button.addEventListener('click', function(e){
         let playerChoice = e.target.value;
-        console.log(playRound(playerChoice, getComputerChoice()));
+        let result = document.querySelector('#result');
+        result.textContent = playRound(playerChoice, getComputerChoice());
     });
 });
 
