@@ -77,12 +77,19 @@ function tryAgain(){
 
 function endOfGame(){
     if(playerWins == 5 || computerWins == 5){
+        disableButtons();
+
         const content = document.querySelector('.content');
         const end = document.createElement('div');
         end.textContent = determineWinner();
         content.appendChild(end);
+        
         tryAgain();
     }
+}
+
+function disableButtons(){
+    buttons.forEach(button => button.disabled = true);
 }
 
 const buttons = document.querySelectorAll('button');
