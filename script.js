@@ -9,15 +9,16 @@ function getComputerChoice(){
    return weapons[index];
 }
 
-function getPlayerChoice(){
-    let str;
-    do{
-        str = prompt("Rock Paper Scissors?", "");
-        if(str === null) return null;
-        str = str.toLowerCase();
-    }while(str === "" || !weapons.includes(str))
-    return str;
-}
+// function getPlayerChoice(){
+//     let str;
+//     do{
+//         str = prompt("Rock Paper Scissors?", "");
+//         if(str === null) return null;
+//         str = str.toLowerCase();
+//     }while(str === "" || !weapons.includes(str))
+//     return str;
+// }
+
 
 function playRound(playerChoice, computerChoice){
     if (playerChoice == "rock"){
@@ -74,24 +75,32 @@ function tryAgain(){
     }
 }
 
-function game(){
-    console.clear();
-    reset();
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', function(e){
+        let playerChoice = e.target.value;
+        console.log(playRound(playerChoice, getComputerChoice()));
+    });
+});
 
-    for(let i = 0; i < 5; i++){
-        let playerChoice = getPlayerChoice();
-        let computerChoice = getComputerChoice();
+// function game(){
+//     console.clear();
+//     reset();
 
-        if(playerChoice === null){
-            return;
-        }
+//     for(let i = 0; i < 5; i++){
+//         let playerChoice = getPlayerChoice();
+//         let computerChoice = getComputerChoice();
 
-        console.log(playRound(playerChoice, computerChoice));
-        console.log(`You: ${playerWins}\tComputer:${computerWins}`);
-    }
+//         if(playerChoice === null){
+//             return;
+//         }
 
-    determineWinner();
-    tryAgain();
-}
+//         console.log(playRound(playerChoice, computerChoice));
+//         console.log(`You: ${playerWins}\tComputer:${computerWins}`);
+//     }
 
-game();
+//     determineWinner();
+//     tryAgain();
+// }
+
+// game();
