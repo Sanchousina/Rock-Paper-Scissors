@@ -80,7 +80,9 @@ buttons.forEach(button => {
     button.addEventListener('click', function(e){
         let playerChoice = e.target.value;
         let result = document.querySelector('#result');
+        let score = document.querySelector('#score');
         result.textContent = playRound(playerChoice, getComputerChoice());
+        score.textContent = `You: ${playerWins}\tComputer:${computerWins}`;
     });
 });
 
