@@ -62,16 +62,26 @@ function reset(){
 }
 
 function determineWinner(){
-    playerWins > computerWins ? console.log("You Won!!!")
-    : playerWins < computerWins? console.log("You lost^(")
-    : console.log("Friendship won!");
+    return playerWins > computerWins ? "You Won!!!"
+    : playerWins < computerWins? "You lost^("
+    : "Friendship won!";
 }
 
 function tryAgain(){
-    if(confirm("Wanna try again?")){
-        game();
-    }else{
-        return;
+    const btn = document.createElement('button');
+    btn.textContent = 'Try Again';
+    const content = document.querySelector('.content');
+    content.appendChild(btn);
+    btn.addEventListener('click', () => window.location.reload());
+}
+
+function endOfGame(){
+    if(playerWins == 5 || computerWins == 5){
+        const content = document.querySelector('.content');
+        const end = document.createElement('div');
+        end.textContent = determineWinner();
+        content.appendChild(end);
+        tryAgain();
     }
 }
 
@@ -83,6 +93,7 @@ buttons.forEach(button => {
         let score = document.querySelector('#score');
         result.textContent = playRound(playerChoice, getComputerChoice());
         score.textContent = `You: ${playerWins}\tComputer:${computerWins}`;
+        endOfGame();
     });
 });
 
